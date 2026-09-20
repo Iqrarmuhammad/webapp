@@ -13,21 +13,14 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-  - task: AzureStaticWebApp@0
-    inputs:
-      # Optional: set this if your SWA resource is managed via deployment token
-      azure_static_web_apps_api_token: $(deployment_token)
-      
-      # Path to your app source code relative to repository root
-      app_location: '/' 
-      
-      # Path to your API code if using Azure Functions (leave empty if none)
-      api_location: '' 
-      
-      # Built app output directory relative to app_location
-      # e.g., 'build' for React, 'dist' for Vue/Angular, '' for static HTML
-      output_location: 'build'
-
+ - task: AzureStaticWebApp@0
+      displayName: 'Deploy to Azure Static Web App'
+      inputs:
+        app_location: '/'
+        output_location: ''
+        skip_app_build: true
+        skip_api_build: true
+        azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
